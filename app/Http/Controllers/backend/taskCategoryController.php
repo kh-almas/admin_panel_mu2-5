@@ -1,0 +1,45 @@
+<?php
+
+namespace App\Http\Controllers\backend;
+
+use App\Http\Controllers\Controller;
+use App\Http\Requests\taskCategoryRequest;
+use App\Models\Taskcategory;
+use Illuminate\Http\Request;
+
+class taskCategoryController extends Controller
+{
+    public function index()
+    {
+        $taskCategory = auth()->user()->taskCategorys;
+        return view('backend.page.task.category',compact('taskCategory'));
+    }
+
+    public function store(taskCategoryRequest $request)
+    {
+        auth()->user()->taskCategorys()->create([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        return back()->with('create_category','Item created successfully!');
+    }
+
+    public function update(taskCategoryRequest $request, Taskcategory $category)
+    {
+        //$update_category = Taskcategory::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+            'description' => $request->description,
+        ]);
+        return back()->with('category_update', 'Item update successfully!');
+    }
+
+    public function destroy(Taskcategory $category)
+    {
+        foreach ($category->tasks as $tasks){
+            $tasks->delete();
+        }
+        $category->delete();
+        return back()->with('category_delete', 'Item successfully deleted!');
+    }
+}
