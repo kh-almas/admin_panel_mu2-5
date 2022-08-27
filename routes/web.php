@@ -21,6 +21,7 @@ use Laravel\Socialite\Facades\Socialite;
 */
 
 
+
 //$settings = Settings::where('id', '1')->first();
 //if ($settings->registration === 0){
 //    Route::get('/register', function() {
