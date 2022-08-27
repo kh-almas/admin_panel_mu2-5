@@ -20,11 +20,6 @@ class VideolibraryController extends Controller
         return view('backend.page.store.video.index',compact('video'));
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(StoreLibrariesVideoRequest $request)
     {
         if($request->hasFile('file') && $request->hasFile('thumbnail')){
@@ -69,11 +64,6 @@ class VideolibraryController extends Controller
     public function show(Videolibrary $video)
     {
         return view('backend.page.store.video.show',compact('video'));
-    }
-
-    public function edit(Videolibrary $video)
-    {
-        //
     }
 
     public function update(Request $request, Videolibrary $video)

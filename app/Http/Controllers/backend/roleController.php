@@ -14,28 +14,12 @@ class roleController extends Controller
         return view('backend.page.role',compact('role'));
     }
 
-    public function create()
-    {
-        //
-    }
-
     public function store(Request $request)
     {
         $assign_role = Role::create([
             'role' => $request->role,
         ]);
-        //return redirect()->back();
         return redirect()->back()->with('create_message', $request->role);
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
     }
 
     public function update(Request $request,$id)

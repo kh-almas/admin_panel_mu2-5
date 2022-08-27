@@ -21,10 +21,10 @@ class ImagelibraryController extends Controller
         return view('backend.page.store.image.index',compact('stored_image'));
     }
 
-    public function create()
-    {
-        //
-    }
+//    public function create()
+//    {
+//        //
+//    }
 
     public function store(StoreLibrariesImageRequest $request)
     {
@@ -65,15 +65,15 @@ class ImagelibraryController extends Controller
 
     }
 
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
+//    public function show($id)
+//    {
+//        //
+//    }
+//
+//    public function edit($id)
+//    {
+//        //
+//    }
 
     public function update(Request $request, $id)
     {

@@ -32,4 +32,5 @@ Route::view('/typography','backend.examples.page.typography')->name('typography'
 
 
 
+Route::view('/profile/view','backend.example.page.view-profile')->name('profile.view');
 Route::view('/jetdefaultregister','auth.jetdefaultregister')->name('jetdefaultregister');

@@ -29,21 +29,28 @@ use Illuminate\Support\Facades\Route;
 |dashboard.
 */
 
-
-
+//Page
 Route::get('/',[pageViewController::class,'index'])->name('index');
+Route::get('/require-approve',[pageViewController::class,'is_approve'])->name('approve');
 
-Route::resource('/library/images',ImagelibraryController::class);
-Route::resource('/library/videos', VideolibraryController::class);
-
+//Library
+Route::get('/library/images', [ImagelibraryController::class, 'index'])->name('images.index');
+Route::post('/library/images', [ImagelibraryController::class, 'store'])->name('images.store');
+Route::put('/library/images/{image}', [ImagelibraryController::class, 'update'])->name('images.update');
+Route::delete('/library/images/{image}', [ImagelibraryController::class, 'destroy'])->name('images.destroy');
+Route::get('/library/videos', [VideolibraryController::class, 'index'])->name('videos.index');
+Route::post('/library/videos', [VideolibraryController::class, 'store'])->name('videos.store');
+Route::get('/library/videos/{video}', [VideolibraryController::class, 'show'])->name('videos.show');
+Route::put('/library/videos/{video}', [VideolibraryController::class, 'update'])->name('videos.update');
+Route::delete('/library/videos/{video}', [VideolibraryController::class, 'destroy'])->name('videos.destroy');
 Route::view('/library/videossssssssss','backend.page.videos')->name('library.videos');
 Route::view('/play/videos','backend.page.play-video')->name('play.video');
+
+//Profile
 Route::get('/profile/settings', [pageViewController::class,'profile'])->name('profile.settings');
-Route::view('/profile/update','backend.page.update-profile')->name('profile.update');
-Route::view('/profile/view','backend.page.view-profile')->name('profile.view');
+Route::post('/profile/settings', [pageViewController::class,'session'])->name('logoutsession');
 
-
-
+//User in admin
 Route::get('/users',[viewForUserFromAdmin::class,'index'])->name('users');
 Route::get('/users/update/{user}',[viewForUserFromAdmin::class,'viewUpdateUserForm'])->name('showUpdateUserFormByAdmin');
 Route::put('/users/update/{user}',[updateUserinfoByAdminController::class,'updateGeneralInfoByAdmin'])->name('UpdateUserFormByAdmin');
@@ -56,43 +63,33 @@ Route::get('/user/send-mail-to-group-user',[viewForUserFromAdmin::class,'sendMes
 Route::post('/user/send-mail-to-group-user',sendMessageToGroupUserController::class)->name('sendMessageToGroupUser');
 Route::get('/user/send-mail-to-all-user',[viewForUserFromAdmin::class,'sendMessageToAllUser'])->name('viewSendMessageToAllUser');
 Route::post('/user/send-mail-to-all-user',sendMessageToAllUserController::class)->name('sendMessageToAllUser');
-
-//unused route
-//Route::resource('/users',userController::class);
-//Route::get('/user/message/{user}',[userController::class,'singleUserMessage'])->name('user.singleUserMessage');
-//Route::post('/user/message/{user}',[userController::class,'checkmail'])->name('checkmail');
-//end unused route
-
 Route::get('/user/backup',[userController::class,'backup'])->name('backup');
 
-
-
-Route::view('/users/add','backend.page.new-user')->name('add.users');
-
-Route::get('dashboard/tasks', [taskController::class, 'index'])->name('tasks.index');
-Route::get('dashboard/tasks/create', [taskController::class, 'create'])->name('tasks.create');
-Route::post('dashboard/tasks', [taskController::class, 'store'])->name('tasks.store');
-Route::get('dashboard/tasks/{task}', [taskController::class, 'show'])->name('tasks.show');
-Route::get('dashboard/tasks/{task}/edit', [taskController::class, 'edit'])->name('tasks.edit');
-Route::put('dashboard/tasks/{task}', [taskController::class, 'update'])->name('tasks.update');
-Route::delete('dashboard/tasks/{task}', [taskController::class, 'destroy'])->name('tasks.destroy');
+//Task
+Route::get('/task/category', [taskCategoryController::class, 'index'])->name('category.index');
+Route::post('/task/category', [taskCategoryController::class, 'store'])->name('category.store');
+Route::put('/task/category/{category}', [taskCategoryController::class, 'update'])->name('category.update');
+Route::delete('/task/category/{category}', [taskCategoryController::class, 'destroy'])->name('category.destroy');
+Route::get('/tasks', [taskController::class, 'index'])->name('tasks.index');
+Route::get('/tasks/create', [taskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [taskController::class, 'store'])->name('tasks.store');
+Route::get('/tasks/{task}', [taskController::class, 'show'])->name('tasks.show');
+Route::get('/tasks/{task}/edit', [taskController::class, 'edit'])->name('tasks.edit');
+Route::put('/tasks/{task}', [taskController::class, 'update'])->name('tasks.update');
+Route::delete('/tasks/{task}', [taskController::class, 'destroy'])->name('tasks.destroy');
 Route::put('/tasks/is_important/{task}', [taskController::class,'importantTask'])->name('importantTask');
 
-
-Route::get('dashboard/task/category', [taskCategoryController::class, 'index'])->name('category.index');
-Route::post('dashboard/task/category', [taskCategoryController::class, 'store'])->name('category.store');
-Route::put('dashboard/task/category/{category}', [taskCategoryController::class, 'update'])->name('category.update');
-Route::delete('dashboard/task/category/{category}', [taskCategoryController::class, 'destroy'])->name('category.destroy');
-
-//backend.page.settings
+//App settings
 Route::get('/settings',[settingsController::class,'index'])->name('settings');
 Route::put('/settings',[settingsController::class,'update'])->name('settings.update');
 
-Route::resource('roles',roleController::class);
+//Roles
+Route::get('/roles', [roleController::class, 'index'])->name('roles.index');
+Route::post('/roles', [roleController::class, 'store'])->name('roles.store');
+Route::put('/roles/{role}', [roleController::class, 'update'])->name('roles.update');
+Route::delete('/roles/{role}', [roleController::class, 'destroy'])->name('roles.destroy');
 
-Route::post('/profile/settings', [pageViewController::class,'session'])->name('logoutsession');
-
+//User access info
 Route::get('/access/info',[accessInfoController::class,'access_info'])->name('accessInfo');
 Route::delete('/access/info/{info}',[accessInfoController::class,'delete_access_info'])->name('accessInfo.delete');
 
-Route::get('/require-approve',[pageViewController::class,'is_approve'])->name('approve');
