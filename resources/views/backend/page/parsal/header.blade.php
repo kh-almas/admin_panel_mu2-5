@@ -132,6 +132,15 @@
                     <span class="sidebar-text">Role</span>
                 </a>
             </li>
+
+
+
+            <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'role.php'){ echo 'active'; } ?>">
+                <a href="{{ route('api-tokens.index') }}" class="nav-link">
+                    <span class="sidebar-icon"><i class="fas fa-user-tag"></i></span>
+                    <span class="sidebar-text">Api Token</span>
+                </a>
+            </li>
 {{--            <li class="nav-item">--}}
 {{--                <span class="nav-link  d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-app">--}}
 {{--                    <span>--}}

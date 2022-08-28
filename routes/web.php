@@ -20,7 +20,7 @@ use Laravel\Socialite\Facades\Socialite;
 |
 */
 
-
+Route::get('/dashboards',[pageViewController::class,'index'])->name('dashboard');
 
 //$settings = Settings::where('id', '1')->first();
 //if ($settings->registration === 0){
