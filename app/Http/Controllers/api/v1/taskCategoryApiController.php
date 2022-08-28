@@ -35,12 +35,12 @@ class taskCategoryApiController extends Controller
         }
     }
 
-    public function show(Taskcategory $task_category)
+    public function show(Taskcategory $category)
     {
         //get user id by query parameter
         $userId = request('user');
 
-        if($userId == $task_category->user_id)
+        if($userId == $category->user_id)
         {
             return new JsonResponse([
                 'data' => $task_category,
@@ -50,13 +50,45 @@ class taskCategoryApiController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Taskcategory $category)
     {
-        //
+        $userId = request('user');
+        if($userId == $category->user_id)
+        {
+            $data = $category->update([
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
+            if($data)
+            {
+                return new JsonResponse([
+                    'data' => $data,
+                ]);
+            }else{
+                return 'data is not updated';
+            }
+        }else{
+            return 'You are not authorize to update this item';
+        }
+
     }
 
-    public function destroy($id)
+    public function destroy(Taskcategory $category)
     {
-        //
+        $userId = request('user');
+        if($userId == $category->user_id)
+        {
+            $data = $category->delete();
+            if($data)
+            {
+                return new JsonResponse([
+                    'data' => $data,
+                ]);
+            }else{
+                return 'data is not stored';
+            }
+        }else{
+            return 'You are not authorize to update this item';
+        }
     }
 }
