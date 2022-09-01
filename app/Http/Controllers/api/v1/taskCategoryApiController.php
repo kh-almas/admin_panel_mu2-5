@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Exceptions\global\generalException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\taskCategoryStoreApiRequest;
+use App\Http\Requests\api\v1\taskCategoryUpdateApiRequest;
 use App\Http\Resources\api\v1\taskCategoryApiResourch;
 use App\Models\Taskcategory;
 use Illuminate\Http\JsonResponse;
@@ -14,9 +16,10 @@ class taskCategoryApiController extends Controller
 {
     public function index()
     {
-        //get user id by query parameter
+        //get user id and item by query parameter
         $userId = request('user');
-        $data = Taskcategory::where('user_id', $userId)->paginate('15');
+        $item = request('item') ?? 15;
+        $data = Taskcategory::where('user_id', $userId)->paginate($item);
         return taskCategoryApiResourch::collection($data);
     }
 
@@ -24,7 +27,7 @@ class taskCategoryApiController extends Controller
     {
         DB::transaction(function() use ($request) {
             $data = Taskcategory::create([
-                'name' => $request->name,
+                'name' => data_get($request, 'name', 'this is title'),
                 'description' => $request->description,
                 'user_id' => $request->user_id,
             ]);
@@ -44,17 +47,17 @@ class taskCategoryApiController extends Controller
         //get user id by query parameter
         $userId = request('user');
 
+//        throw_if($userId != $category->user_id,generalException::class, 'You are not authorize to update this item');
+
         if($userId == $category->user_id)
         {
             return new taskCategoryApiResourch($category);
         }else{
-            return new JsonResponse([
-                'errors' => 'You are not authorize to update this item',
-            ],400);
+            throw new generalException('You are not authorize to show this item',300);
         }
     }
 
-    public function update(Request $request, Taskcategory $category)
+    public function update(taskCategoryUpdateApiRequest $request, Taskcategory $category)
     {
         $userId = request('user');
         if($userId == $category->user_id)
@@ -70,9 +73,7 @@ class taskCategoryApiController extends Controller
                 return 'data is not updated';
             }
         }else{
-            return new JsonResponse([
-                'errors' => 'You are not authorize to update this item',
-            ],400);
+            throw new generalException('You are not authorize to update this item',300);
         }
 
     }
@@ -94,9 +95,7 @@ class taskCategoryApiController extends Controller
                 ],200);
             }
         }else{
-            return new JsonResponse([
-                'errors' => 'You are not authorize to update this item',
-            ],400);
+            throw new generalException('You are not authorize to delete this item',300);
         }
     }
 }
