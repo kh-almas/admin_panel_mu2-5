@@ -2,64 +2,97 @@
 
 namespace App\Http\Controllers\api\v1;
 
+use App\Exceptions\global\generalException;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\v1\taskStoreApiRequest;
 use App\Models\Task;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\api\v1\taskApiResourch;
 
 class taskApiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $userId = request('user');
+        $item = request('item') ?? 15;
+        $data = Task::where('user_id', $userId)->paginate($item);
+        return taskApiResourch::collection($data);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(taskStoreApiRequest $request)
     {
-        //
+        DB::transaction(function () use ($request){
+            $data = Task::create([
+                'name' => $request->name,
+                'description' => $request->description,
+            ]);
+            $data->user()->sync($request->user_id);
+            return $data;
+        }):
+
+        if($data){
+            return new taskApiResourch($data);
+        }else{
+            return 'data is not stored';
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show(Task $task)
     {
-        //
+        $userId = request('user');
+
+        if($userId == $task->user_id)
+        {
+            return new taskApiResourch($category);
+        }else{
+            throw new generalException('You are not authorize to show this item',300);
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Task $task)
     {
-        //
+        $userId = request('user');
+        if($userId == $task->user_id) {
+            DB::transaction(function () use ($request) {
+                $data = $task->update([
+                    'name' => $request->name,
+                    'description' => $request->description,
+                ]);
+                $data->user()->sync($request->user_id);
+                return $data;
+            }):
+
+            if ($data) {
+                return new taskApiResourch($data);
+            } else {
+                return new JsonResponse([
+                    'errors' => 'Could not update this item',
+                ],400);
+            }
+        }else{
+            throw new generalException('You are not authorize to update this item',300);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Task $task)
     {
-        //
+        $userId = request('user');
+        if($userId == $task->user_id) {
+            $data = $category->delete();
+            if($data)
+            {
+                return new JsonResponse([
+                    'errors' => 'Could not delete this item',
+                ],400);
+            }else{
+                return new JsonResponse([
+                    'data' => 'success',
+                ],200);
+            }
+        }else{
+            throw new generalException('You are not authorize to update this item',300);
+        }
     }
 }
