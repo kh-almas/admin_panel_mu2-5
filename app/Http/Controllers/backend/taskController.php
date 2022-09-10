@@ -6,14 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\taskUpdateRequest;
 use App\Models\Task;
+use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Gate;
 
 class taskController extends Controller
 {
     public function index()
     {
-        $task = Task::where('user_id',auth()->id())->latest()->paginate(10);
+        Gate::allows('isAdmin') ? Response::allow() : abort(403);
+        $task = Task::paginate(10);//where('user_id',auth()->id())->latest()->paginate(10);
+//        $this->authorize('project_protector', [$project, $something]);
         return view('backend.page.task.list',compact('task'));
     }
 
@@ -44,7 +48,23 @@ class taskController extends Controller
 
     public function show(Task $task)
     {
-        return view('backend.page.task.view',compact('task'));
+//        ddd($task);
+        $response = Gate::inspect('view', $task);
+
+        if ($response->allowed()) {
+            return view('backend.page.task.view',compact('task'));
+        } else {
+            echo $response->message();
+        }
+
+//        $fsdg = Gate::allows('check_user', $task);
+//        if ($fsdg) {
+//            abort(403);
+//        }
+//        $this->allows('check_user', $task);
+//        if ($task->can('view', $task)) {
+//            abort(403);
+//        }
     }
 
     public function edit(Task $task)

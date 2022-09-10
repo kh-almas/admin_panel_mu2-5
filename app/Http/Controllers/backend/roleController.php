@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Permission;
 use App\Models\role;
 use Illuminate\Http\Request;
 
@@ -10,8 +11,9 @@ class roleController extends Controller
 {
     public function index()
     {
-        $role = Role::all();
-        return view('backend.page.role',compact('role'));
+        $roles = Role::all();
+        $permissions = Permission::all();
+        return view('backend.page.role',compact('roles', 'permissions'));
     }
 
     public function store(Request $request)

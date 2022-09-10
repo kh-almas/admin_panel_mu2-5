@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\accessInfoController;
 use App\Http\Controllers\backend\pageViewController;
+use App\Http\Controllers\backend\permissionController;
 use App\Http\Controllers\backend\roleController;
 use App\Http\Controllers\backend\settingsController;
 use Illuminate\Support\Facades\Route;
@@ -40,6 +41,8 @@ Route::get('/roles', [roleController::class, 'index'])->name('roles.index');
 Route::post('/roles', [roleController::class, 'store'])->name('roles.store');
 Route::put('/roles/{role}', [roleController::class, 'update'])->name('roles.update');
 Route::delete('/roles/{role}', [roleController::class, 'destroy'])->name('roles.destroy');
+
+Route::post('/roles/permission', [permissionController::class, 'store'])->name('roles.permission.update');
 
 //User access info
 Route::get('/access/info',[accessInfoController::class,'access_info'])->name('accessInfo');

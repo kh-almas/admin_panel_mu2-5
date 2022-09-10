@@ -4,7 +4,7 @@ namespace App\Http\Resources\api\v1;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class taskApiResourch extends JsonResource
+class imageLibraryApiResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,12 @@ class taskApiResourch extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'user_id' => $this->user_id,
-            'category_id' => $this->taskcategory_id,
-            'is_important' => $this->important,
+            'name' => $this->name,
+            'type' => $this->type,
+            'original' => URL::to($this->path),
+            'output' => URL::to($this->output_path),
+            'album_id' => $this->album_id,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ];
     }
 }

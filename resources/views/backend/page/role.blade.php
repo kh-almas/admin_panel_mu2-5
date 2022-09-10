@@ -38,7 +38,7 @@
                 </div>
             </form>
             <div class="row mt-3">
-                @foreach($role as $role)
+                @foreach($roles as $role)
                     <div class="col-md-8">
                         <p>{{$role->role}}</p>
                     </div>
@@ -93,98 +93,31 @@
                         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title">Give roles permeation</h3>
+                                    <h3 class="modal-title">Give roles permission</h3>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="pt-3">
-                                        <div class="row align-items-center">
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Create post
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Update post
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Edit post
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Delete post
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Approve user
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Update user
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Make new user
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Reset user password
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Delete user
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3 col-md-4 col-sm-6">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
-                                                    <label class="form-check-label" for="defaultCheck10">
-                                                        Download User Information
-                                                    </label>
-                                                </div>
+                                <form action="{{ route('dashboard.roles.permission.update') }}" method="post">
+                                    @csrf
+                                    <div class="modal-body">
+                                        <div class="pt-3">
+                                            <div class="row align-items-center">
+                                                @foreach($permissions as $permission)
+                                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $permission->permission }}" id="defaultCheck10">
+                                                            <label class="form-check-label" for="defaultCheck10">
+                                                                {{__($permission->name)}}
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn btn-secondary">Accept</button>
-                                </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-secondary">Accept</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>

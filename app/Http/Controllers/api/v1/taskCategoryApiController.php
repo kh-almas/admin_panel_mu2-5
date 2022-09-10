@@ -6,10 +6,9 @@ use App\Exceptions\global\generalException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\v1\taskCategoryStoreApiRequest;
 use App\Http\Requests\api\v1\taskCategoryUpdateApiRequest;
-use App\Http\Resources\api\v1\taskCategoryApiResourch;
+use App\Http\Resources\api\v1\taskCategoryApiResource;
 use App\Models\Taskcategory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class taskCategoryApiController extends Controller
@@ -20,7 +19,7 @@ class taskCategoryApiController extends Controller
         $userId = request('user');
         $item = request('item') ?? 15;
         $data = Taskcategory::where('user_id', $userId)->paginate($item);
-        return taskCategoryApiResourch::collection($data);
+        return taskCategoryApiResource::collection($data);
     }
 
     public function store(taskCategoryStoreApiRequest $request)
@@ -36,7 +35,7 @@ class taskCategoryApiController extends Controller
 
 
         if($data){
-            return new taskCategoryApiResourch($data);
+            return new taskCategoryApiResource($data);
         }else{
             return 'data is not stored';
         }
@@ -51,7 +50,7 @@ class taskCategoryApiController extends Controller
 
         if($userId == $category->user_id)
         {
-            return new taskCategoryApiResourch($category);
+            return new taskCategoryApiResource($category);
         }else{
             throw new generalException('You are not authorize to show this item',300);
         }
@@ -68,7 +67,7 @@ class taskCategoryApiController extends Controller
             ]);
             if($data)
             {
-                return new taskCategoryApiResourch($data);
+                return new taskCategoryApiResource($data);
             }else{
                 return 'data is not updated';
             }

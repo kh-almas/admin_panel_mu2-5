@@ -9,7 +9,7 @@ use App\Models\Task;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Resources\api\v1\taskApiResourch;
+use App\Http\Resources\api\v1\taskApiResource;
 
 class taskApiController extends Controller
 {
@@ -18,7 +18,7 @@ class taskApiController extends Controller
         $userId = request('user');
         $item = request('item') ?? 15;
         $data = Task::where('user_id', $userId)->paginate($item);
-        return taskApiResourch::collection($data);
+        return taskApiResource::collection($data);
     }
 
     public function store(taskStoreApiRequest $request)
@@ -33,7 +33,7 @@ class taskApiController extends Controller
         }):
 
         if($data){
-            return new taskApiResourch($data);
+            return new taskApiResource($data);
         }else{
             return 'data is not stored';
         }
@@ -45,7 +45,7 @@ class taskApiController extends Controller
 
         if($userId == $task->user_id)
         {
-            return new taskApiResourch($category);
+            return new taskApiResource($category);
         }else{
             throw new generalException('You are not authorize to show this item',300);
         }
@@ -65,7 +65,7 @@ class taskApiController extends Controller
             }):
 
             if ($data) {
-                return new taskApiResourch($data);
+                return new taskApiResource($data);
             } else {
                 return new JsonResponse([
                     'errors' => 'Could not update this item',
