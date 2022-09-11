@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Backend;
 
+use App\Models\Role;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -35,6 +36,8 @@ class UserInAdmin extends Component
                     ->search('country',$this->searchByCountry)
                     ->latest()
                     ->paginate(15),
+            'roles' => Role::all(),
         ]);
+
     }
 }

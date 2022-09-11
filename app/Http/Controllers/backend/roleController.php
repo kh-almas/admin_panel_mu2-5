@@ -4,14 +4,14 @@ namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Permission;
-use App\Models\role;
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class roleController extends Controller
 {
     public function index()
     {
-        $roles = Role::all();
+        $roles = Role::latest()->paginate('5');
         $permissions = Permission::all();
         return view('backend.page.role',compact('roles', 'permissions'));
     }
@@ -26,7 +26,7 @@ class roleController extends Controller
 
     public function update(Request $request,$id)
     {
-        $role = role::findorfail($id);
+        $role = Role::findorfail($id);
         //return $role;
         $role->update([
             'role' => $request->role,
@@ -36,7 +36,7 @@ class roleController extends Controller
 
     public function destroy($id)
     {
-        $role = role::destroy($id);
+        $role = Role::destroy($id);
         //$role->delete();
         return redirect()->back()->with('delete_message', 'Role Deleted');
     }

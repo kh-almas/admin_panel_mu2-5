@@ -12,6 +12,13 @@
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
+            @if(session('role_permission'))
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <span class="fas fa-bullhorn me-1"></span>
+                    <strong>{{Session::get('role_permission')}}</strong>
+                    <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             @if(session('update_message'))
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 <span class="fas fa-bullhorn me-1"></span>
@@ -60,7 +67,7 @@
                                 </form>
                                 <!-- roles permission modal button-->
 
-                                <a type="button" class="dropdown-item mb-3" data-bs-toggle="modal" data-bs-target="#modal-role">Update Role</a>
+                                <a type="button" class="dropdown-item mb-3" data-bs-toggle="modal" data-bs-target="#role_permission{{$role->id}}">Update Role</a>
                             </div>
                         </div>
                     </div>
@@ -89,22 +96,24 @@
                     <!-- end of role name edit Modal -->
 
                     <!-- permission modal -->
-                    <div class="modal fade" id="modal-role" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <div class="modal fade" id="role_permission{{$role->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h3 class="modal-title">Give roles permission</h3>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form action="{{ route('dashboard.roles.permission.update') }}" method="post">
+                                <form action="{{ route('dashboard.roles.permission.update',$role->id) }}" method="post">
                                     @csrf
+                                    @method('put')
                                     <div class="modal-body">
                                         <div class="pt-3">
                                             <div class="row align-items-center">
                                                 @foreach($permissions as $permission)
                                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                                         <div class="form-check">
-                                                            <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $permission->permission }}" id="defaultCheck10">
+                                                            <input class="form-check-input" type="checkbox" name="permission[]" value="{{ $permission->id }}" id="defaultCheck10" @foreach($role->permissions as $per){{ $per->id == $permission->id ? 'checked' : '' }}@endforeach>
+{{--                                                            @foreach($role->permission as $per){{ $per->id == $permission->id ? 'checked' : '' }}@endforeach--}}
                                                             <label class="form-check-label" for="defaultCheck10">
                                                                 {{__($permission->name)}}
                                                             </label>
@@ -123,6 +132,9 @@
                     </div>
                     <!-- End of permission modal -->
                 @endforeach
+            </div>
+            <div class="d-flex justify-content-end mt-3">
+                {{ $roles->links() }}
             </div>
         </div>
     </div>

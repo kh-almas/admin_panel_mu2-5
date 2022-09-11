@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\backend\makeUserByAdmin;
+use App\Http\Controllers\backend\permissionController;
+use App\Http\Controllers\backend\roleController;
 use App\Http\Controllers\backend\sendMessageToAllUserController;
 use App\Http\Controllers\backend\sendMessageToGroupUserController;
 use App\Http\Controllers\backend\sendMessageToSingleUserController;
@@ -8,6 +10,16 @@ use App\Http\Controllers\backend\updateUserinfoByAdminController;
 use App\Http\Controllers\backend\userController;
 use App\Http\Controllers\backend\viewForUserFromAdmin;
 use Illuminate\Support\Facades\Route;
+
+//Roles
+Route::get('/roles', [roleController::class, 'index'])->name('roles.index');
+Route::post('/roles', [roleController::class, 'store'])->name('roles.store');
+Route::put('/roles/{role}', [roleController::class, 'update'])->name('roles.update');
+Route::delete('/roles/{role}', [roleController::class, 'destroy'])->name('roles.destroy');
+
+Route::put('/roles/permission/{role}', [permissionController::class, 'permission'])->name('roles.permission.update');
+Route::put('/user/roles/{user}', [permissionController::class, 'role'])->name('user.roles.update');
+
 
 //User action in admin
 Route::get('/users',[viewForUserFromAdmin::class,'index'])->name('users');
@@ -23,3 +35,4 @@ Route::post('/user/send-mail-to-group-user',sendMessageToGroupUserController::cl
 Route::get('/user/send-mail-to-all-user',[viewForUserFromAdmin::class,'sendMessageToAllUser'])->name('viewSendMessageToAllUser');
 Route::post('/user/send-mail-to-all-user',sendMessageToAllUserController::class)->name('sendMessageToAllUser');
 Route::get('/user/backup',[userController::class,'backup'])->name('backup');
+
