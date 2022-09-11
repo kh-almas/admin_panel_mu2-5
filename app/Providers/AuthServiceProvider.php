@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
+    public function __construct($app)
+    {
+        parent::__construct($app);
+    }
+
     /**
      * The policy mappings for the application.
      *
@@ -25,8 +30,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('create_task_category', function ($user){
-            return $user == 'create_task_category';
+        Gate::define('create_task_category', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == ''){
+                    return true;
+                }
+            }
+            return false;
         });
 
         Gate::define('update_task_category', function ($user){
