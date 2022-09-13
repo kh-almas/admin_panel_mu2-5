@@ -12,6 +12,7 @@ class sendMessageToAllUserController extends Controller
 {
     public function __invoke(Request $request)
     {
+        $this->authorize('user_access');
         $user = User::all();
         Mail::to($user)->send(new sendMessageToAllUser($request));
         return redirect()->route('viewSendMessageToAllUser');

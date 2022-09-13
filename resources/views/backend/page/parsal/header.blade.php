@@ -54,18 +54,22 @@
                 </span>
                 <div class="multi-level collapse {{ request()->routeIs('dashboard.category.index') || request()->routeIs('dashboard.tasks.index') || request()->routeIs('dashboard.tasks.create') || request()->routeIs('dashboard.tasks.edit') ? 'show' : '' }}" role="list" id="Task" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ request()->routeIs('dashboard.category.index') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.category.index') }}" class="nav-link">
-                                <span class="sidebar-icon"><i class="fas fa-image"></i></span>
-                                <span class="sidebar-text">Category</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ request()->routeIs('dashboard.tasks.index') || request()->routeIs('dashboard.tasks.create') || request()->routeIs('dashboard.tasks.edit') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.tasks.index') }}" class="nav-link">
-                                <span class="sidebar-icon"><i class="fas fa-video"></i></span>
-                                <span class="sidebar-text">Task List</span>
-                            </a>
-                        </li>
+                        @can('task_category')
+                            <li class="nav-item {{ request()->routeIs('dashboard.category.index') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.category.index') }}" class="nav-link">
+                                    <span class="sidebar-icon"><i class="fas fa-image"></i></span>
+                                    <span class="sidebar-text">Category</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('task')
+                            <li class="nav-item {{ request()->routeIs('dashboard.tasks.index') || request()->routeIs('dashboard.tasks.create') || request()->routeIs('dashboard.tasks.edit') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.tasks.index') }}" class="nav-link">
+                                    <span class="sidebar-icon"><i class="fas fa-video"></i></span>
+                                    <span class="sidebar-text">Task List</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </li>
@@ -79,43 +83,51 @@
                 </span>
                 <div class="multi-level collapse {{ request()->routeIs('dashboard.images.index') || request()->routeIs('dashboard.videos.index') ? 'show' : '' }}" role="list" id="library" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ request()->routeIs('dashboard.images.index') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.images.index') }}" class="nav-link">
-                                <span class="sidebar-icon"><i class="fas fa-image"></i></span>
-                                <span class="sidebar-text">Image</span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ request()->routeIs('dashboard.videos.index') ? 'active' : '' }}">
-                            <a href="{{ route('dashboard.videos.index') }}" class="nav-link">
-                                <span class="sidebar-icon"><i class="fas fa-video"></i></span>
-                                <span class="sidebar-text">Video</span>
-                            </a>
-                        </li>
+                        @can('image_gallery')
+                            <li class="nav-item {{ request()->routeIs('dashboard.images.index') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.images.index') }}" class="nav-link">
+                                    <span class="sidebar-icon"><i class="fas fa-image"></i></span>
+                                    <span class="sidebar-text">Image</span>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('video_gallery')
+                            <li class="nav-item {{ request()->routeIs('dashboard.videos.index') ? 'active' : '' }}">
+                                <a href="{{ route('dashboard.videos.index') }}" class="nav-link">
+                                    <span class="sidebar-icon"><i class="fas fa-video"></i></span>
+                                    <span class="sidebar-text">Video</span>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </div>
             </li>
-            <li class="nav-item {{ request()->routeIs('dashboard.profile.settings') ? 'active' : '' }}">
-                <a href="{{ route('dashboard.profile.settings') }}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-user"></span></span>
-                    <span class="sidebar-text">Profile Settings</span>
-                </a>
-            </li>
+            @can('web_settings')
+                <li class="nav-item {{ request()->routeIs('dashboard.profile.settings') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.profile.settings') }}" class="nav-link">
+                        <span class="sidebar-icon"><span class="fas fa-user"></span></span>
+                        <span class="sidebar-text">Profile Settings</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('user_access')
             <li class="nav-item {{ request()->routeIs('dashboard.users') ? 'active' : '' }}">
                 <a href="{{ route('dashboard.users') }}" class="nav-link">
                     <span class="sidebar-icon"><i class="fas fa-users"></i></span>
                     <span class="sidebar-text">Users</span>
                 </a>
             </li>
-            <li class="nav-item {{ request()->routeIs('dashboard.accessInfo') ? 'active' : '' }}">
-                <a href="{{ route('dashboard.accessInfo') }}" class="nav-link">
-                    <span class="sidebar-icon"><i class="fas fa-users"></i></span>
-                    <span class="sidebar-text">Access Info</span>
-                </a>
-            </li>
+            @endcan
 
-
-
-
+            @can('view_access_information')
+                <li class="nav-item {{ request()->routeIs('dashboard.accessInfo') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.accessInfo') }}" class="nav-link">
+                        <span class="sidebar-icon"><i class="fas fa-users"></i></span>
+                        <span class="sidebar-text">Access Info</span>
+                    </a>
+                </li>
+            @endcan
 
             <li class="nav-item {{ request()->routeIs('ddashboard.settings') ? 'active' : '' }}">
                 <a href="{{ route('dashboard.settings') }}" class="nav-link">
@@ -123,8 +135,6 @@
                     <span class="sidebar-text">settings</span>
                 </a>
             </li>
-
-
 
             <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'role.php'){ echo 'active'; } ?>">
                 <a href="{{ route('dashboard.roles.index') }}" class="nav-link">

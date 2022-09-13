@@ -23,150 +23,264 @@ class AuthServiceProvider extends ServiceProvider
 
     /**
      * Register any authentication / authorization services.
-     *
+     *22
      * @return void
      */
     public function boot()
     {
         $this->registerPolicies();
 
-        Gate::define('create_task_category', function (){
+        Gate::define('task_category', function (){
             $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
             foreach ($permissions as $permission)
             {
-                if($permission == ''){
+                if($permission == 'task_category'){
                     return true;
                 }
             }
             return false;
         });
 
-        Gate::define('update_task_category', function ($user){
-            return $user == 'update_task_category';
+        Gate::define('update_user_task_category_by_admin', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user_task_category_by_admin'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('edit_task_category', function ($user){
-            return $user == 'edit_task_category';
+        Gate::define('task', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'task'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_task_category', function ($user){
-            return $user == 'delete_task_category';
+        Gate::define('update_user_task_by_admin', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user_task_by_admin'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('create_task', function ($user){
-            return $user == 'create_task';
+        Gate::define('image_gallery', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'image_gallery'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('update_task', function ($user){
-            return $user == 'update_task';
+        Gate::define('update_user_image_by_admin', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user_image_by_admin'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('edit_task', function ($user){
-            return $user == 'edit_task';
+        Gate::define('video_gallery', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'video_gallery'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_task', function ($user){
-            return $user == 'delete_task';
+        Gate::define('update_user_video_from_admin', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user_video_from_admin'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('upload_image', function ($user){
-            return $user == 'upload_image';
+        Gate::define('user_access', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'user_access'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('update_image', function ($user){
-            return $user == 'update_image';
+        Gate::define('approve_user', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'approve_user'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('edit_image', function ($user){
-            return $user == 'edit_image';
+        Gate::define('update_user', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_image', function ($user){
-            return $user == 'delete_image';
+        Gate::define('update_user_role', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_user_role'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('upload_video', function ($user){
-            return $user == 'upload_video';
+        Gate::define('make_new_user', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'make_new_user'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('update_video', function ($user){
-            return $user == 'update_video';
+        Gate::define('reset_user_password', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'reset_user_password'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('edit_video', function ($user){
-            return $user == 'edit_video';
+        Gate::define('delete_user', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'delete_user'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_video', function ($user){
-            return $user == 'delete_video';
+        Gate::define('download_user_information', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'download_user_information'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('video_note', function ($user){
-            return $user == 'video_note';
+        Gate::define('update_role', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_role'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_video_note', function ($user){
-            return $user == 'delete_video_note';
+        Gate::define('update_role_permission', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'update_role_permission'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('approve_user', function ($user){
-            return $user == 'approve_user';
+        Gate::define('view_access_information', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'view_access_information'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('update_user', function ($user){
-            return $user == 'update_user';
+        Gate::define('delete_access_information', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'delete_access_information'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('make_new_user', function ($user){
-            return $user == 'make_new_user';
+        Gate::define('api_permission', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'api_permission'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('reset_user_password', function ($user){
-            return $user == 'reset_user_password';
+        Gate::define('web_settings', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'web_settings'){
+                    return true;
+                }
+            }
+            return false;
         });
 
-        Gate::define('delete_user', function ($user){
-            return $user == 'delete_user';
-        });
-
-        Gate::define('download_user_information', function ($user){
-            return $user == 'download_user_information';
-        });
-
-        Gate::define('view_total_user', function ($user){
-            return $user == 'view_total_user';
-        });
-
-        Gate::define('update_role', function ($user){
-            return $user == 'update_role';
-        });
-
-        Gate::define('update_role_permission', function ($user){
-            return $user == 'update_role_permission';
-        });
-
-        Gate::define('view_access_information', function ($user){
-            return $user == 'view_access_information';
-        });
-
-        Gate::define('delete_access_information', function ($user){
-            return $user == 'delete_access_information';
-        });
-
-        Gate::define('clear_browser_sessions', function ($user){
-            return $user == 'clear_browser_sessions';
-        });
-
-        Gate::define('api_permission', function ($user){
-            return $user == 'api_permission';
-        });
-
-        Gate::define('update_settings', function ($user){
-            return $user == 'update_settings';
-        });
-
-        Gate::define('permission_for_set_maintenance_mood', function ($user){
-            return $user == 'permission_for_set_maintenance_mood';
+        Gate::define('permission_for_set_maintenance_mood', function (){
+            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+            foreach ($permissions as $permission)
+            {
+                if($permission == 'permission_for_set_maintenance_mood'){
+                    return true;
+                }
+            }
+            return false;
         });
     }
 }

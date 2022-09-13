@@ -19,7 +19,7 @@ Route::delete('/roles/{role}', [roleController::class, 'destroy'])->name('roles.
 
 Route::put('/roles/permission/{role}', [permissionController::class, 'permission'])->name('roles.permission.update');
 Route::put('/user/roles/{user}', [permissionController::class, 'role'])->name('user.roles.update');
-//Route::get('/check_permission', [permissionController::class, 'check_permission']);
+Route::get('/abcd', [permissionController::class, 'check_permission']);
 
 
 //User action in admin

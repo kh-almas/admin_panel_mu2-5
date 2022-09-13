@@ -3,7 +3,7 @@
 @section('title', 'all task')
 
 @section('admin-content')
-
+    @can('task')
     <div class="mx-auto mt-3 mt-lg-5 card py-4 px-3 shadow shadow-lg-hover" style="max-width: 700px;">
         <form action="{{ route('dashboard.tasks.update',$task->id) }}" method="post">
             @csrf
@@ -40,5 +40,5 @@
             </div>
         </form>
     </div>
-
+    @endcan
 @endsection

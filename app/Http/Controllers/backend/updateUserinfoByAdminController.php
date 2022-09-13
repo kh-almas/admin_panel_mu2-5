@@ -11,7 +11,7 @@ class updateUserinfoByAdminController extends Controller
 {
     public function updateGeneralInfoByAdmin(Request $request, User $user)
     {
-        //return $user;
+        $this->authorize('update_user');
         $user->update([
             'name'=> $request->name,
             'email'=> $request->email,
@@ -30,6 +30,7 @@ class updateUserinfoByAdminController extends Controller
 
     public function logoutFromAdmin($user)
     {
+        $this->authorize('user_access');
         DB::table('sessions')->where('user_id', $user)->delete();
         return redirect()->back();
     }

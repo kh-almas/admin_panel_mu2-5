@@ -8,6 +8,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class permissionController extends Controller
 {
@@ -18,14 +19,26 @@ class permissionController extends Controller
     }
     public function role(Request $request ,User $user)
     {
-        $this->authorize('create_task_category');
+        $this->authorize('update_user_role');
         $user->roles()->sync($request->role);
         return back()->with('role_user', 'User role is updated');
     }
 
-//    public function check_permission(Permission $permission)
-//    {
-//        return session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
-//        return $permission->check();
-//    }
+    public function check_permission(Permission $permission)
+    {
+//        /check_permission
+        $permission = [];
+        $role = auth()->user()->roles;
+        foreach($role as $per)
+        {
+            $permi = $per->permissions;
+            foreach ($permi as $szdsvfzscv)
+            {
+                $permission[] = $szdsvfzscv->permission;
+            }
+        }
+        session()->put('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv', $permission);
+        return session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+        return $permission->check();
+    }
 }

@@ -67,12 +67,15 @@
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('dashboard.showUpdateUserFormByAdmin',$user->id) }}">View</a>
                             <a class="dropdown-item" href="{{route('dashboard.viewSendMessageToSingleUser',$user->id)}}">Send message</a>
-                            <a type="button" class="dropdown-item mb-3" data-bs-toggle="modal" data-bs-target="#user-role{{$user->id}}">Update Role</a>
+                            @can('update_user_role')
+                                <a type="button" class="dropdown-item mb-3" data-bs-toggle="modal" data-bs-target="#user-role{{$user->id}}">Update Role</a>
+                            @endcan
                         </div>
                     </div>
                 </td>
             </tr>
             <!-- End of Item -->
+            @can('update_user_role')
             <!-- Modal Content -->
             <div class="modal fade" id="user-role{{$user->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
@@ -111,6 +114,7 @@
                 </div>
             </div>
             <!-- End of Modal Content -->
+            @endcan
         @endforeach
         </tbody>
     </table>

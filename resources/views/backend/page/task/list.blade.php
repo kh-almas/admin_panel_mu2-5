@@ -3,6 +3,7 @@
 @section('title', 'all task')
 
 @section('admin-content')
+    @can('task')
     <div class="d-lg-flex justify-content-between flex-wrap fle9x-md-nowrap align-items-center py-4">
         <div class="d-none d-lg-block col-lg-6 ps-0 mb-2 mb-lg-0">
             <div class="me-lg-3 d-flex align-items-center d-flex justify-content-center justify-content-lg-start">
@@ -129,4 +130,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection

@@ -6,23 +6,20 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use App\Http\Requests\taskUpdateRequest;
 use App\Models\Task;
-use Illuminate\Auth\Access\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Gate;
 
 class taskController extends Controller
 {
     public function index()
     {
-        Gate::allows('isAdmin') ? Response::allow() : abort(403);
-        $task = Task::paginate(10);//where('user_id',auth()->id())->latest()->paginate(10);
-//        $this->authorize('project_protector', [$project, $something]);
+        $this->authorize('task');
+        $task = Task::where('user_id',auth()->id())->latest()->paginate(10);
         return view('backend.page.task.list',compact('task'));
     }
 
     public function create()
     {
+        $this->authorize('task');
         $taskCategory = auth()->user()->taskCategorys;
         $task = auth()->user()->tasks()->get();
         return view('backend.page.task.create',compact('taskCategory','task'));
@@ -30,6 +27,7 @@ class taskController extends Controller
 
     public function store(TaskRequest $request)
     {
+        $this->authorize('task');
         if ($request->category === 'Select a category'){
             return redirect()->back()->with('empty_category_errors','Please select a category');
         }
@@ -48,33 +46,33 @@ class taskController extends Controller
 
     public function show(Task $task)
     {
-//        ddd($task);
-        $response = Gate::inspect('view', $task);
-
-        if ($response->allowed()) {
-            return view('backend.page.task.view',compact('task'));
-        } else {
-            echo $response->message();
+        $this->authorize('task');
+        if(auth()->id() === $task->user_id)
+        {
+            abort('403');
         }
+        return view('backend.page.task.view',compact('task'));
 
-//        $fsdg = Gate::allows('check_user', $task);
-//        if ($fsdg) {
-//            abort(403);
-//        }
-//        $this->allows('check_user', $task);
-//        if ($task->can('view', $task)) {
-//            abort(403);
-//        }
     }
 
     public function edit(Task $task)
     {
+        $this->authorize('task');
+        if(auth()->id() === $task->user_id)
+        {
+            abort('403');
+        }
         $taskCategory = auth()->user()->taskCategorys;
         return view('backend.page.task.update',compact('task','taskCategory'));
     }
 
     public function update(taskUpdateRequest $request,Task $task)
     {
+        $this->authorize('task');
+        if(auth()->id() === $task->user_id)
+        {
+            abort('403');
+        }
         if(!$request->important){
             $request->important = 0 ;
         }
@@ -89,6 +87,11 @@ class taskController extends Controller
 
     public function importantTask(Request $request,Task $task)
     {
+        $this->authorize('task');
+        if(auth()->id() === $task->user_id)
+        {
+            abort('403');
+        }
         if($request->isimportent == 1){
             $task->update([
                 'important' => '0'
@@ -104,6 +107,11 @@ class taskController extends Controller
 
     public function destroy(Task $task)
     {
+        $this->authorize('task');
+        if(auth()->id() === $task->user_id)
+        {
+            abort('403');
+        }
         $task->delete();
         return back()->with('delete_task','Task deleted');
     }

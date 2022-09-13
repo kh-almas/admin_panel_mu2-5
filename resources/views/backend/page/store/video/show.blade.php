@@ -3,6 +3,7 @@
 @section('title','all images')
 
 @section('store_view')
+    @can('video_gallery')
     <div class="row mt-1">
         <div class="col-12 col-xl-8">
             <div class="d-xl-none d-flex justify-content-end mb-2">
@@ -18,4 +19,5 @@
         </div>
         <livewire:backend.videos-note :video="$video"/>
     </div>
+    @endcan
 @endsection

@@ -3,6 +3,7 @@
 @section('title', 'access info')
 
 @section('admin-content')
+    @can('view_access_information')
     <div class="card card-body shadow-sm my-4">
         <h2 class="h5 mb-4">All user access information</h2>
 
@@ -41,11 +42,13 @@
                             </button>
                             <div class="dropdown-menu">
                                 <button type="button" class="dropdown-item btn" data-bs-toggle="modal" data-bs-target="#accessinfo{{ $info->id}}">View</button>
+                                @can('delete_access_information')
                                 <form action="{{ route('dashboard.accessInfo.delete',$info->id) }}" method="post" class="my-0">
                                     @csrf
                                     @method('delete')
                                     <button class="dropdown-item btn ">delete</button>
                                 </form>
+                                @endcan
                             </div>
                         </div>
                     </td>
@@ -137,8 +140,7 @@
             </div>
         </div>
     </div>
-
-
+    @endcan
 @endsection
 
 

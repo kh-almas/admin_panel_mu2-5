@@ -12,14 +12,13 @@ class settingsController extends Controller
 {
     public function index()
     {
-        //$settings = Settings::where('id',1)->firstOrFail();
-        //dd($settings);
+        $this->authorize('web_settings');
         return view('backend.page.settings');
     }
 
     public function update(Request $request)
     {
-        //dd($request);
+        $this->authorize('web_settings');
         // convert MB to Bytes (B) binary
         $lt = $request->store_limit;
         $limit = $lt * 1048576;

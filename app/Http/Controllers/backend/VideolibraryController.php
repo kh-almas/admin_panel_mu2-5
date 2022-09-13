@@ -16,12 +16,14 @@ class VideolibraryController extends Controller
 {
     public function index()
     {
+        $this->authorize('video_gallery');
         $video = auth()->user()->videolibrarys;
         return view('backend.page.store.video.index',compact('video'));
     }
 
     public function store(StoreLibrariesVideoRequest $request)
     {
+        $this->authorize('video_gallery');
         if($request->hasFile('file') && $request->hasFile('thumbnail')){
 
             $previous_file_name = pathinfo($request->file->getClientOriginalName(),PATHINFO_FILENAME);
@@ -55,7 +57,6 @@ class VideolibraryController extends Controller
             ]);
 
             return redirect()->back()->with('uploaded', 'Video Upload successfully');
-
         }else{
             return redirect()->back();
         }
@@ -63,11 +64,21 @@ class VideolibraryController extends Controller
 
     public function show(Videolibrary $video)
     {
+        $this->authorize('video_gallery');
+        if(auth()->id() === $video->person_id)
+        {
+            abort('403');
+        }
         return view('backend.page.store.video.show',compact('video'));
     }
 
     public function update(Request $request, Videolibrary $video)
     {
+        $this->authorize('video_gallery');
+        if(auth()->id() === $video->person_id)
+        {
+            abort('403');
+        }
         $video->update([
             'name' => $request->name,
             'description' => $request->description,
@@ -77,21 +88,23 @@ class VideolibraryController extends Controller
 
     public function destroy(Videolibrary $video)
     {
+        $this->authorize('video_gallery');
+        if(auth()->id() === $video->person_id)
+        {
+            abort('403');
+        }
         foreach ($video->notes as $note)
         {
             $note->delete();
         }
-
         if(Storage::disk('public')->exists('store/'.auth()->user()->uniqueId.'/library/video/file/'.$video->link))
         {
             Storage::disk('public')->delete('store/'.auth()->user()->uniqueId.'/library/video/file/'.$video->link);
         }
-
         if(Storage::disk('public')->exists('store/'.auth()->user()->uniqueId.'/library/video/thumbnail/'.$video->thumbnail))
         {
             Storage::disk('public')->delete('store/'.auth()->user()->uniqueId.'/library/video/thumbnail/'.$video->thumbnail);
         }
-
         $video->delete();
         return redirect()->back()->with('delete', 'Video  deleted');
     }

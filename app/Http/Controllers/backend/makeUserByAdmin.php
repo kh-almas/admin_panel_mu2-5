@@ -14,6 +14,7 @@ class makeUserByAdmin extends Controller
 {
     public function __invoke(makeUserByAdminRequest $request)
     {
+        $this->authorize('make_new_user');
         $unique_id = Helper::RandomNumber(new User,'uniqueId',10,4, 'USR');
         $settings = Settings::where('id',1)->firstOrFail();
 

@@ -9,86 +9,46 @@ class permissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
+     *22
      * @return void
      */
     public function run()
     {
         DB::table('permissions')->insert([
-            'name' => 'Create task category',
-            'permission' => 'create_task_category',
+            'name' => 'Task category',
+            'permission' => 'task_category',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Update task category',
-            'permission' => 'update_task_category',
+            'name' => 'Update user task category by admin',
+            'permission' => 'update_user_task_category_by_admin',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Edit task category',
-            'permission' => 'edit_task_category',
+            'name' => 'task',
+            'permission' => 'task',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Delete task category',
-            'permission' => 'delete_task_category',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Create task',
-            'permission' => 'create_task',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Update task',
-            'permission' => 'update_task',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Edit task',
-            'permission' => 'edit_task',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete task',
-            'permission' => 'delete_task',
+            'name' => 'Update user task by admin',
+            'permission' => 'update_user_task_by_admin',
         ]);
 
 
         DB::table('permissions')->insert([
-            'name' => 'Upload image',
-            'permission' => 'upload_image',
+            'name' => 'Image gallery',
+            'permission' => 'image_gallery',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Update image',
-            'permission' => 'update_image',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Edit image',
-            'permission' => 'edit_image',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete image',
-            'permission' => 'delete_image',
+            'name' => 'Update user image by admin',
+            'permission' => 'update_user_image_by_admin',
         ]);
 
 
         DB::table('permissions')->insert([
-            'name' => 'Upload video',
-            'permission' => 'upload_video',
+            'name' => 'Video gallery',
+            'permission' => 'video_gallery',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Update video',
-            'permission' => 'update_video',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Edit video',
-            'permission' => 'edit_video',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete video',
-            'permission' => 'delete_video',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Video note',
-            'permission' => 'video_note',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete video note',
-            'permission' => 'delete_video_note',
+            'name' => 'Update user video by admin',
+            'permission' => 'update_user_video_by_admin',
         ]);
 
 
@@ -99,6 +59,10 @@ class permissionSeeder extends Seeder
         DB::table('permissions')->insert([
             'name' => 'Update user',
             'permission' => 'update_user',
+        ]);
+        DB::table('permissions')->insert([
+            'name' => 'Update user role',
+            'permission' => 'update_user_role',
         ]);
         DB::table('permissions')->insert([
             'name' => 'Make new user',
@@ -117,8 +81,8 @@ class permissionSeeder extends Seeder
             'permission' => 'download_user_information',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'View total user',
-            'permission' => 'view_total_user',
+            'name' => 'User access',
+            'permission' => 'user_access',
         ]);
 
 
@@ -143,16 +107,12 @@ class permissionSeeder extends Seeder
 
 
         DB::table('permissions')->insert([
-            'name' => 'Clear browser sessions',
-            'permission' => 'clear_browser_sessions',
-        ]);
-        DB::table('permissions')->insert([
             'name' => 'Api permission',
             'permission' => 'api_permission',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Update settings',
-            'permission' => 'update_settings',
+            'name' => 'website settings',
+            'permission' => 'web_settings',
         ]);
         DB::table('permissions')->insert([
             'name' => 'Maintenance mood permission',

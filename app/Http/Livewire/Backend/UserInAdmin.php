@@ -30,12 +30,13 @@ class UserInAdmin extends Component
 
         ///search coming from appServiceProvider
         return view('livewire.backend.user-in-admin', [
-            'users' => User::search('name',$this->searchByName)
-                    ->search('email',$this->searchByEmail)
-                    ->search('role',$this->searchByRole)
-                    ->search('country',$this->searchByCountry)
-                    ->latest()
-                    ->paginate(15),
+            'users' => User::paginate(15),
+//            'users' => User::search('name',$this->searchByName)
+//                    ->search('email',$this->searchByEmail)
+//                    ->search('role',$this->searchByRole)
+//                    ->search('country',$this->searchByCountry)
+//                    ->latest()
+//                    ->paginate(15),
             'roles' => Role::all(),
         ]);
 

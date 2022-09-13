@@ -3,6 +3,7 @@
 @section('title','all images')
 
 @section('store_view')
+    @can('video_gallery')
     <div class="row">
         @foreach($video as $vid)
             <div class="col-md-6">
@@ -41,4 +42,5 @@
             @include('backend.page.store.video.update')
         @endforeach
     </div>
+    @endcan
 @endsection

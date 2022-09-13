@@ -3,6 +3,7 @@
 @section('title', 'all task')
 
 @section('admin-content')
+    @can('task_category')
     <div class="d-lg-flex justify-content-between flex-wrap fle9x-md-nowrap align-items-center py-4">
         <div class="col-auto d-flex justify-content-between ps-0 mb-4 mb-lg-0">
             <div class="me-lg-3">
@@ -130,7 +131,5 @@
             <!-- End edit of Modal Content -->
         @endforeach
     </div>
-
-
-
+    @endcan
 @endsection

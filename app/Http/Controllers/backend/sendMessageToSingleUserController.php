@@ -12,8 +12,8 @@ class sendMessageToSingleUserController extends Controller
 {
     public function __invoke(User $user,Request $request)
     {
+        $this->authorize('user_access');
         Mail::to($user->email)->send(new sendMessageToSingleUser($request));
         return redirect()->route('viewSendMessageToAllUser');
-
     }
 }
