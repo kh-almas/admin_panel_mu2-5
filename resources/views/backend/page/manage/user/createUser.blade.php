@@ -42,7 +42,6 @@
                                     </div>
                                 </div>
                                 <div>
-                                <livewire:generate-password />
                                 </div>
                                 <!-- End of Form -->
                                 <div class="form-group">

@@ -129,12 +129,14 @@
                 </li>
             @endcan
 
-            <li class="nav-item {{ request()->routeIs('ddashboard.settings') ? 'active' : '' }}">
-                <a href="{{ route('dashboard.settings') }}" class="nav-link">
-                    <span class="sidebar-icon"><span class="fas fa-cog"></span></span>
-                    <span class="sidebar-text">settings</span>
-                </a>
-            </li>
+            @can('web_settings')
+                <li class="nav-item {{ request()->routeIs('ddashboard.settings') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard.settings') }}" class="nav-link">
+                        <span class="sidebar-icon"><span class="fas fa-cog"></span></span>
+                        <span class="sidebar-text">settings</span>
+                    </a>
+                </li>
+            @endcan
 
             <li class="nav-item <?php if(basename($_SERVER['PHP_SELF']) == 'role.php'){ echo 'active'; } ?>">
                 <a href="{{ route('dashboard.roles.index') }}" class="nav-link">

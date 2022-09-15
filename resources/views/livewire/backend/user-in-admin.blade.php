@@ -65,7 +65,9 @@
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('dashboard.showUpdateUserFormByAdmin',$user->id) }}">View</a>
+                            @can('update_user')
+                                <a class="dropdown-item" href="{{ route('dashboard.showUpdateUserFormByAdmin',$user->id) }}">View</a>
+                            @endcan
                             <a class="dropdown-item" href="{{route('dashboard.viewSendMessageToSingleUser',$user->id)}}">Send message</a>
                             @can('update_user_role')
                                 <a type="button" class="dropdown-item mb-3" data-bs-toggle="modal" data-bs-target="#user-role{{$user->id}}">Update Role</a>

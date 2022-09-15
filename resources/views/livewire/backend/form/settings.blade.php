@@ -8,17 +8,21 @@
                 <input name="registration" type="hidden" value="0">
                 <input name="registration" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" {{ $settings->registration || old('registration',0) === 1 ? 'checked' : ''}}>
             </div>
-            <div class="form-check form-switch">
-                <label class="form-check-label" for="flexSwitchCheckChecked">Maintenance mood</label>
-                <input name="maintenance" type="hidden" value="0">
-                <input name="maintenance" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" {{ $settings->maintenance || old('maintenance',0) === 1 ? 'checked' : ''}}>
+            @can('permission_for_set_maintenance_mood')
+                <div class="form-check form-switch">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Maintenance mood</label>
+                    <input name="maintenance" type="hidden" value="0">
+                    <input name="maintenance" class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" value="1" {{ $settings->maintenance || old('maintenance',0) === 1 ? 'checked' : ''}}>
+                </div>
+            @endcan
+        </div>
+        @can('permission_for_set_maintenance_mood')
+            <div>
+                <input wire:model.lazy="maintenance_link" name="maintenance_link" type="text" class="form-control mb-3" placeholder="1630542a-246b-4b66-afa1-dd72a4c43515" value="{{old('store_limit')}}">
+                <p class="mb-0">Copy this link before set maintenance mode :</p>
+                <p>http://127.0.0.1:8000/{{ $maintenance_link ?? $settings->maintenance_link ?? '1630542a-246b-4b66-afa1-dd72a4c43515'}}</p>
             </div>
-        </div>
-        <div>
-            <input wire:model.lazy="maintenance_link" name="maintenance_link" type="text" class="form-control mb-3" placeholder="1630542a-246b-4b66-afa1-dd72a4c43515" value="{{old('store_limit')}}">
-            <p class="mb-0">Copy this link before set maintenance mode :</p>
-            <p>adminpanel.test/{{ $maintenance_link ?? $settings->maintenance_link ?? '1630542a-246b-4b66-afa1-dd72a4c43515'}}</p>
-        </div>
+        @endcan
         <div class="border-bottom mb-4"></div>
         <div class="mb-4">
             <div>

@@ -206,11 +206,11 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
-        Gate::define('update_role', function (){
+        Gate::define('manage_role', function (){
             $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
             foreach ($permissions as $permission)
             {
-                if($permission == 'update_role'){
+                if($permission == 'manage_role'){
                     return true;
                 }
             }

@@ -6,9 +6,7 @@ use App\Actions\Helpers\Permission;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
 
 class permissionController extends Controller
 {
@@ -27,18 +25,18 @@ class permissionController extends Controller
     public function check_permission(Permission $permission)
     {
 //        /check_permission
-        $permission = [];
-        $role = auth()->user()->roles;
-        foreach($role as $per)
-        {
-            $permi = $per->permissions;
-            foreach ($permi as $szdsvfzscv)
-            {
-                $permission[] = $szdsvfzscv->permission;
-            }
-        }
-        session()->put('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv', $permission);
+//        $permission = [];
+//        $role = auth()->user()->roles;
+//        foreach($role as $per)
+//        {
+//            $permi = $per->permissions;
+//            foreach ($permi as $szdsvfzscv)
+//            {
+//                $permission[] = $szdsvfzscv->permission;
+//            }
+//        }
+//        session()->put('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv', $permission);
         return session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
-        return $permission->check();
+//        return $permission->check();
     }
 }

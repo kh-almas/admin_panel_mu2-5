@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Maintenance;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class settingsController extends Controller
 {
@@ -23,18 +25,20 @@ class settingsController extends Controller
         $lt = $request->store_limit;
         $limit = $lt * 1048576;
 
-        if($request->maintenance === '1' && $request->maintenance_link === ''){
-            $request->maintenance_link = '1630542a-246b-4b66-afa1-dd72a4c43515';
-        }elseif ($request->maintenance === '0' && $request->maintenance_link)
+        $maintenance = $request->maintenance_link;
+
+        if($request->maintenance === '1' && $maintenance === ''){
+            $maintenance = '1630542a-246b-4b66-afa1-dd72a4c43515';
+        }elseif ($request->maintenance === '0' && $maintenance)
         {
-            $request->maintenance_link = '';
+            $maintenance = '';
         }
 
         $settings = Settings::where('id',1)->firstOrFail();
         $st = $settings->update([
             'registration' => $request->registration,
             'maintenance' => $request->maintenance,
-            'maintenance_link' => $request->maintenance_link,
+            'maintenance_link' => $maintenance,
             'permit_library' => $request->permit_library,
             'storage_limit' => $limit,
             'user_approve' => $request->user_approve,
@@ -43,10 +47,14 @@ class settingsController extends Controller
         DB::table('users')->update([
             'have_storage_library' => $limit,
         ]);
-        if($request->maintenance === '1'){
-            Artisan::call('down --secret="'.$request->maintenance_link.'"');
-        }elseif ($request->maintenance === '0'){
-            Artisan::call('up');
+        if($this->authorize('permission_for_set_maintenance_mood'))
+        {
+            if($request->maintenance === '1'){
+                Mail::to($request->user())->send(new Maintenance($maintenance));
+                Artisan::call('down --secret="'.$request->maintenance_link.'"');
+            }elseif ($request->maintenance === '0'){
+                Artisan::call('up');
+            }
         }
         return redirect()->back();
     }
