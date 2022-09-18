@@ -11,14 +11,14 @@ class taskCategoryController extends Controller
 {
     public function index()
     {
-        $this->authorize('create_task_category');
+        $this->authorize('task_category');
         $taskCategory = auth()->user()->taskCategorys;
         return view('backend.page.task.category',compact('taskCategory'));
     }
 
     public function store(taskCategoryRequest $request)
     {
-        $this->authorize('create_task_category');
+        $this->authorize('task_category');
         auth()->user()->taskCategorys()->create([
             'name' => $request->name,
             'description' => $request->description,
@@ -28,7 +28,7 @@ class taskCategoryController extends Controller
 
     public function update(taskCategoryRequest $request, Taskcategory $category)
     {
-        $this->authorize('create_task_category');
+        $this->authorize('task_category');
         if (!auth()->id() === $category->user_id)
         {
             abort('403');
@@ -42,7 +42,7 @@ class taskCategoryController extends Controller
 
     public function destroy(Taskcategory $category)
     {
-        $this->authorize('create_task_category');
+        $this->authorize('task_category');
         if (!auth()->id() === $category->user_id)
         {
             abort('403');

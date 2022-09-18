@@ -18,7 +18,7 @@ class RegistrationMiddleware
     public function handle(Request $request, Closure $next)
     {
         $settings = Settings::where('id', '1')->firstOrFail();
-        if ($settings->registration === 0){
+        if ($settings->registration == 0){
             if(request()->routeIs('register'))
             {
                 return redirect()->route('login');

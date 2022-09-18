@@ -69,14 +69,6 @@ class permissionSeeder extends Seeder
             'permission' => 'make_new_user',
         ]);
         DB::table('permissions')->insert([
-            'name' => 'Reset user password',
-            'permission' => 'reset_user_password',
-        ]);
-        DB::table('permissions')->insert([
-            'name' => 'Delete user',
-            'permission' => 'delete_user',
-        ]);
-        DB::table('permissions')->insert([
             'name' => 'Download user information',
             'permission' => 'download_user_information',
         ]);

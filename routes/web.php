@@ -45,9 +45,11 @@ Route::get('/auth/github/callback',[socialController::class,'githubCallback']);
 
 
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+//Route::get('/', function () {
+//    return view('welcome');
+//})->name('home');
+
+Route::get('/',[pageViewController::class,'home'])->name('home');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

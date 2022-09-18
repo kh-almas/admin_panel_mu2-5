@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Models\AccessInfo;
+use App\Models\Settings;
 use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
@@ -14,6 +15,11 @@ use Illuminate\Support\Facades\DB;
 
 class pageViewController extends Controller
 {
+    public function home()
+    {
+        return view('welcome');
+    }
+
     public function index()
     {
         $dates = collect();

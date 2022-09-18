@@ -173,28 +173,6 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
-        Gate::define('reset_user_password', function (){
-            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
-            foreach ($permissions as $permission)
-            {
-                if($permission == 'reset_user_password'){
-                    return true;
-                }
-            }
-            return false;
-        });
-
-        Gate::define('delete_user', function (){
-            $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
-            foreach ($permissions as $permission)
-            {
-                if($permission == 'delete_user'){
-                    return true;
-                }
-            }
-            return false;
-        });
-
         Gate::define('download_user_information', function (){
             $permissions = session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
             foreach ($permissions as $permission)
