@@ -23,9 +23,9 @@ class StoreLibrariesImageRequest extends FormRequest
      */
     protected function prepareForValidation()
     {
-        $this->merge([
-            'key' => 'image',
-        ]);
+//        $this->merge([
+//            'key' => 'image',
+//        ]);
     }
 
     /**

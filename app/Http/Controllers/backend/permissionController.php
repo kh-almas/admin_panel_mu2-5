@@ -25,18 +25,18 @@ class permissionController extends Controller
     public function check_permission(Permission $permission)
     {
 //        /check_permission
-//        $permission = [];
-//        $role = auth()->user()->roles;
-//        foreach($role as $per)
-//        {
-//            $permi = $per->permissions;
-//            foreach ($permi as $szdsvfzscv)
-//            {
-//                $permission[] = $szdsvfzscv->permission;
-//            }
-//        }
-//        session()->put('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv', $permission);
-        return session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
+        $permission = [];
+        $role = auth()->user()->roles;
+        foreach($role as $per)
+        {
+            $permi = $per->permissions;
+            foreach ($permi as $szdsvfzscv)
+            {
+                $permission[] = $szdsvfzscv->permission;
+            }
+        }
+        session()->put('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv', $permission);
+//        return session()->get('dsjkhvnzkdxm-jvhdlidx-zhvnjx-cbxdzvczxcv');
 //        return $permission->check();
     }
 }

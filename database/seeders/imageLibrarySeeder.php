@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Imagelibrary;
 use Illuminate\Database\Seeder;
 
-class userSeeder extends Seeder
+class imageLibrarySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class userSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->times(2000)->create();
+        ImageLibrary::factory()->times(500)->create();
     }
 }
