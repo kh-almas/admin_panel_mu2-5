@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Videolibrary;
+use App\Models\Videonote;
 use Illuminate\Database\Seeder;
 
-class videoLibrarySeeder extends Seeder
+class videoNotesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class videoLibrarySeeder extends Seeder
      */
     public function run()
     {
-        Videolibrary::factory()->times(50)->create();
+        Videonote::factory()->times(20)->create();
     }
 }

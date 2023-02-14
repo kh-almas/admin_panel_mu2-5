@@ -12,7 +12,7 @@ class taskCategoryController extends Controller
     public function index()
     {
         $this->authorize('task_category');
-        $taskCategory = auth()->user()->taskCategorys;
+        $taskCategory = Taskcategory::where('user_id', auth()->id())->latest()->paginate('10');
         return view('backend.page.task.category',compact('taskCategory'));
     }
 

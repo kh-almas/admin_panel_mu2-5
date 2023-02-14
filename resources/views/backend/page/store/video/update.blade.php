@@ -1,6 +1,6 @@
 <!-- vedio edit Modal Content -->
 <div class="modal fade" id="editvideo{{$vid->id}}" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="h6 modal-title">Edit Video Information</h2>

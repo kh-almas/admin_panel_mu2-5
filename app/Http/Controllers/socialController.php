@@ -34,7 +34,7 @@ class socialController extends Controller
     {
         $user = Socialite::driver('google')->stateless()->user();
         // $user->token
-        //dd($user);
+        dd($user);
         $this->_registerOrLogin($user);
         return redirect()->route('home');
     }

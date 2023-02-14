@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
 ////        $this->call(SettingsSeeder::class);
 //        $this->call(permissionSeeder::class);
 //        $this->call(imageLibrarySeeder::class);
-        $this->call(videoLibrarySeeder::class);
+//        $this->call(videoLibrarySeeder::class);
+        $this->call(videoNotesSeeder::class);
     }
 }

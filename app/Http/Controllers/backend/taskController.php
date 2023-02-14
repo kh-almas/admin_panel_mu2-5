@@ -47,7 +47,7 @@ class taskController extends Controller
     public function show(Task $task)
     {
         $this->authorize('task');
-        if(auth()->id() === $task->user_id)
+        if(auth()->id() !== $task->user_id)
         {
             abort('403');
         }
@@ -58,7 +58,7 @@ class taskController extends Controller
     public function edit(Task $task)
     {
         $this->authorize('task');
-        if(auth()->id() === $task->user_id)
+        if(auth()->id() !== $task->user_id)
         {
             abort('403');
         }
@@ -69,7 +69,7 @@ class taskController extends Controller
     public function update(taskUpdateRequest $request,Task $task)
     {
         $this->authorize('task');
-        if(auth()->id() === $task->user_id)
+        if(auth()->id() !== $task->user_id)
         {
             abort('403');
         }
@@ -88,7 +88,7 @@ class taskController extends Controller
     public function importantTask(Request $request,Task $task)
     {
         $this->authorize('task');
-        if(auth()->id() === $task->user_id)
+        if(auth()->id() !== $task->user_id)
         {
             abort('403');
         }
@@ -108,7 +108,7 @@ class taskController extends Controller
     public function destroy(Task $task)
     {
         $this->authorize('task');
-        if(auth()->id() === $task->user_id)
+        if(auth()->id() !== $task->user_id)
         {
             abort('403');
         }

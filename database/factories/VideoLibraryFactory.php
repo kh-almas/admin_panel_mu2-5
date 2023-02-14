@@ -24,9 +24,9 @@ class VideoLibraryFactory extends Factory
         return [
             'person_id'=>'1',
             'name' => $this->faker->text(50),
-            'link' => '',
-            'thumbnail' => '.jpg',
-            'size' => rand(2000, 5000),
+            'link' => 'mov_bbb.mp4',
+            'thumbnail' => 'default.jpg',
+            'size' => rand(2000000, 5000000),
             'description' => $this->faker->text(1000),
         ];
     }

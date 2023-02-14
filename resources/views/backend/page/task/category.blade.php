@@ -130,6 +130,15 @@
             </div>
             <!-- End edit of Modal Content -->
         @endforeach
+
+            <div class="row p-4">
+                <div class="col-7 mt-1">Showing 1 - 10 of 30</div>
+                <div class="col-5">
+                    <div class="btn-group float-end">
+                        {{ $taskCategory->links() }}
+                    </div>
+                </div>
+            </div>
     </div>
     @endcan
 @endsection

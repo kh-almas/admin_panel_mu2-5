@@ -41,6 +41,14 @@
             </div>
             @include('backend.page.store.video.update')
         @endforeach
+            <div class="row p-4">
+                <div class="col-7 mt-1">Showing 1 - 10 of 50</div>
+                <div class="col-5">
+                    <div class="btn-group float-end">
+                        {{ $video->links() }}
+                    </div>
+                </div>
+            </div>
     </div>
     @endcan
 @endsection

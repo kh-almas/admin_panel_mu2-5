@@ -17,7 +17,7 @@ class VideolibraryController extends Controller
     public function index()
     {
         $this->authorize('video_gallery');
-        $video = auth()->user()->videolibrarys;
+        $video = Videolibrary::where('person_id', auth()->id())->latest()->paginate('10');
         return view('backend.page.store.video.index',compact('video'));
     }
 
@@ -65,7 +65,7 @@ class VideolibraryController extends Controller
     public function show(Videolibrary $video)
     {
         $this->authorize('video_gallery');
-        if(auth()->id() === $video->person_id)
+        if(auth()->id() !== $video->person_id)
         {
             abort('403');
         }

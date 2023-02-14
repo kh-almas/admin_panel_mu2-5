@@ -6,7 +6,7 @@
     <div class="flex-xl-row mt-lg-4 mt-md-3 mt-1 d-flex flex-column-reverse" style="overflow-x: hidden">
         <div class="col-12 col-xl-8 pe-lg-2">
             <div class="card card-body shadow-sm mb-4">
-                <h2 class="h5 mb-4">General information</h2>
+                <h2 class="h5 mb-4">User information</h2>
                 @foreach($errors->updateProfileInformation->all() as $error)
                     <span class="error">{{$error}}</span>
                 @endforeach

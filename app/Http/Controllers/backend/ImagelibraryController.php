@@ -16,7 +16,7 @@ class ImagelibraryController extends Controller
     public function index()
     {
         $this->authorize('image_gallery');
-        $stored_image = Imagelibrary::where('person_id', auth()->id())->paginate('24');
+        $stored_image = Imagelibrary::where('person_id', auth()->id())->latest()->paginate('24');
         return view('backend.page.store.image.index',compact('stored_image'));
     }
 

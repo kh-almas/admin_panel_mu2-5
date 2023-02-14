@@ -8,7 +8,7 @@
         <div class="d-none d-lg-block col-lg-6 ps-0 mb-2 mb-lg-0">
             <div class="me-lg-3 d-flex align-items-center d-flex justify-content-center justify-content-lg-start">
                 <a href="{{ route('dashboard.tasks.create') }}" class="btn btn-dark btn-sm me-2" type="button">
-                    <span class="fas fa-plus me-2"></span>New Task {{ auth()->id() }}
+                    <span class="fas fa-plus me-2"></span>New Task
                 </a>
             </div>
         </div>
@@ -70,7 +70,7 @@
                     <div class="col-11 col-lg-8 px-0 mb-4 mb-md-0">
                         <div class="mb-2">
                             <a href="{{ route('dashboard.tasks.show',$todo->id) }}">
-                                <h3 class="h5">{{Illuminate\Support\Str::of($todo->title)->words(10)}} {{$todo->user_id}}</h3>
+                                <h3 class="h5">{{Illuminate\Support\Str::of($todo->title)->words(10)}}</h3>
 
                             </a>
                             <div class="d-block d-sm-flex">
@@ -122,7 +122,7 @@
         @endforeach
 
         <div class="row p-4">
-            <div class="col-7 mt-1">Showing 1 - 20 of 289</div>
+            <div class="col-7 mt-1">Showing 1 - 10 of 60</div>
             <div class="col-5">
                 <div class="btn-group float-end">
                     {{ $task->links() }}
