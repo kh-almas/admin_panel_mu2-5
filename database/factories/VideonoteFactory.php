@@ -22,7 +22,7 @@ class VideonoteFactory extends Factory
     public function definition()
     {
         return [
-            'userID'=>'1',
+            'userID'=>rand(1,2),
             'videosID'=>'1',
             'text' => $this->faker->text(25),
         ];

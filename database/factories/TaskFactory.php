@@ -22,10 +22,10 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'taskCategory_id'=>rand(1,10000),
-            'user_id' => rand(1,1000),
+            'taskCategory_id'=>rand(1,150),
+            'user_id' => rand(1,5),
             'title' => $this->faker->text(50),
-            'description' => $this->faker->text(1000),
+            'description' => $this->faker->text(200),
             'important' => rand(0,1),
         ];
     }

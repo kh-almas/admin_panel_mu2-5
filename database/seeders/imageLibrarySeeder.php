@@ -14,6 +14,6 @@ class imageLibrarySeeder extends Seeder
      */
     public function run()
     {
-        ImageLibrary::factory()->times(500)->create();
+        ImageLibrary::factory()->times(100)->create();
     }
 }

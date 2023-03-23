@@ -22,7 +22,7 @@ class ImageLibraryFactory extends Factory
     public function definition()
     {
         return [
-            'person_id'=>'1',
+            'person_id'=>rand(1, 2),
             'link' => rand(1, 8).'.jpg',
             'size' => rand(2000, 5000),
             'description' => $this->faker->text(1000),

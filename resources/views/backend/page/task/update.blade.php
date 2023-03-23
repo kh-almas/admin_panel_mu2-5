@@ -18,7 +18,6 @@
             <div class="my-4">
                 <label for="category">Category</label>
                 <select name="category" class="form-select mb-0" id="category" aria-label="category select example">
-                    <option>Select a category</option>
                     @foreach($taskCategory as $category)
                         <option value="{{ $category->id }}" {{ $task->taskcategory->name == $category->name ? 'selected' : ''}}>{{ $category->name }}</option>
                     @endforeach

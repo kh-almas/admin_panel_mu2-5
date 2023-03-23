@@ -33,14 +33,14 @@
                                 <label for="email">Your Email</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1"><span class="fas fa-envelope"></span></span>
-                                    <input type="email" class="form-control" placeholder="example@company.com" id="email" name="email" value="{{old('email')}}" autofocus required>
+                                    <input type="email" class="form-control" placeholder="admin@gmail.com/permission@gmail.com" id="email" name="email" value="{{old('email')}}" autofocus required>
                                 </div>
                             </div>
                             <div class="form-group mb-4">
                                 <label for="password">Your Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon2"><span class="fas fa-unlock-alt"></span></span>
-                                    <input type="password" name="password" placeholder="Password" class="form-control" id="password" required>
+                                    <input type="password" name="password" placeholder="password" class="form-control" id="password" required>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-top mb-4">

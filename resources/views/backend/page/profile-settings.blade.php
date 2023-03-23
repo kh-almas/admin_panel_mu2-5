@@ -151,7 +151,9 @@
                 <div class="col-12 mb-1 mb-md-4 pt-0">
                     <div class="card shadow-sm text-center p-0">
                         @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                            <div class="profile-cover rounded-top" data-background="{{ asset('storage/'.auth()->user()->cover_photo_path) }}"></div>
+                            <div class="profile-cover rounded-top" data-background="{{ asset('storage/'.auth()->user()->cover_photo_path) }}">
+                                <img src="{{ asset('storage/'.auth()->user()->cover_photo_path) }}" alt="cover_photo">
+                            </div>
                         @endif
                         <div class="card-body pb-5">
                             @if(Laravel\Jetstream\Jetstream::managesProfilePhotos())

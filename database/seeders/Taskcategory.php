@@ -13,6 +13,6 @@ class Taskcategory extends Seeder
      */
     public function run()
     {
-        \App\Models\Taskcategory::factory()->times(10000)->create();
+        \App\Models\Taskcategory::factory()->times(150)->create();
     }
 }

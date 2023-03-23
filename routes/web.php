@@ -62,3 +62,9 @@ Route::post('/check',function (Request $request){
     return $request;
 })->name('form.check');
 
+Route::get('/make/migration/kjslfngkjdsfgdlkfjkcnilvk',function (){
+//    \Illuminate\Support\Facades\Artisan::call('migrate:fresh');
+//    \Illuminate\Support\Facades\Artisan::call('db:seed');
+});
+
+

@@ -22,12 +22,12 @@ class VideoLibraryFactory extends Factory
     public function definition()
     {
         return [
-            'person_id'=>'1',
+            'person_id'=>rand(1, 2),
             'name' => $this->faker->text(50),
             'link' => 'mov_bbb.mp4',
             'thumbnail' => 'default.jpg',
             'size' => rand(2000000, 5000000),
-            'description' => $this->faker->text(1000),
+            'description' => $this->faker->text(100),
         ];
     }
 }

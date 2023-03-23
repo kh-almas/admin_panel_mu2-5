@@ -23,7 +23,7 @@ class TaskcategoryFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1,1000),
+            'user_id' => rand(1,5),
             'name' => $this->faker->text(30),
             'description' => $this->faker->text(1000),
         ];
